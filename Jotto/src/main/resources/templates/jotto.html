@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>JOTTO</title>
+    <!--<link rel="stylesheet" type ="text/css" href="@{Jotto.css}">-->
+    <!--<link rel="stylesheet" th:href="@{/css/Jotto.css}"/>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/Jotto.css}"/>
+
+    <script defer>
+
+        /*<![CDATA[*/
+
+        for (var letter = 'a'; letter <= 'z'; letter++) {
+            document.getElementById(letter + 'Toggle').style.color  = /*[[${aField}]]*/ 'black';
+            var allUserLetters = document.getElementsByClassName("letter" + letter);
+            for (var i = 0; i < allLetters.length; i++) {
+                if (document.getElementById(letter + 'Toggle').style.color == 'red') {
+                    allUserLetters[i].style.color = 'green'
+                } else if (document.getElementById(letter + 'Toggle').style.color == 'green') {
+                    allUserLetters[i].style.color = 'black'
+                } else {
+                    allUserLetters[i].style.color = 'red'
+                }
+            }
+            var allCompLetters = document.getElementsByClassName("letter" + letter + "Comp");
+            for (var i = 0; i < allCompLetters; i++) {
+                switch (letter) {
+                    case 'a': allCompLetters[i].style.color = /*[[${aFieldComp}]]*/ 'black'; break;
+                    case 'b': allCompLetters[i].style.color = /*[[${bFieldComp}]]*/ 'black'; break;
+                    case 'c': allCompLetters[i].style.color = /*[[${cFieldComp}]]*/ 'black'; break;
+                    case 'd': allCompLetters[i].style.color = /*[[${dFieldComp}]]*/ 'black'; break;
+                    case 'e': allCompLetters[i].style.color = /*[[${eFieldComp}]]*/ 'black'; break;
+                    case 'f': allCompLetters[i].style.color = /*[[${fFieldComp}]]*/ 'black'; break;
+                    case 'g': allCompLetters[i].style.color = /*[[${gFieldComp}]]*/ 'black'; break;
+                    case 'h': allCompLetters[i].style.color = /*[[${hFieldComp}]]*/ 'black'; break;
+                    case 'i': allCompLetters[i].style.color = /*[[${iFieldComp}]]*/ 'black'; break;
+                    case 'j': allCompLetters[i].style.color = /*[[${jFieldComp}]]*/ 'black'; break;
+                    case 'k': allCompLetters[i].style.color = /*[[${kFieldComp}]]*/ 'black'; break;
+                    case 'l': allCompLetters[i].style.color = /*[[${lFieldComp}]]*/ 'black'; break;
+                    case 'm': allCompLetters[i].style.color = /*[[${mFieldComp}]]*/ 'black'; break;
+                    case 'n': allCompLetters[i].style.color = /*[[${nFieldComp}]]*/ 'black'; break;
+                    case 'o': allCompLetters[i].style.color = /*[[${oFieldComp}]]*/ 'black'; break;
+                    case 'p': allCompLetters[i].style.color = /*[[${pFieldComp}]]*/ 'black'; break;
+                    case 'q': allCompLetters[i].style.color = /*[[${qFieldComp}]]*/ 'black'; break;
+                    case 'r': allCompLetters[i].style.color = /*[[${rFieldComp}]]*/ 'black'; break;
+                    case 's': allCompLetters[i].style.color = /*[[${sFieldComp}]]*/ 'black'; break;
+                    case 't': allCompLetters[i].style.color = /*[[${tFieldComp}]]*/ 'black'; break;
+                    case 'u': allCompLetters[i].style.color = /*[[${uFieldComp}]]*/ 'black'; break;
+                    case 'v': allCompLetters[i].style.color = /*[[${vFieldComp}]]*/ 'black'; break;
+                    case 'w': allCompLetters[i].style.color = /*[[${wFieldComp}]]*/ 'black'; break;
+                    case 'x': allCompLetters[i].style.color = /*[[${xFieldComp}]]*/ 'black'; break;
+                    case 'y': allCompLetters[i].style.color = /*[[${yFieldComp}]]*/ 'black'; break;
+                    case 'z': allCompLetters[i].style.color = /*[[${zFieldComp}]]*/ 'black'; break;
+                }
+            }
+        }
+
+
+        /*]]>*/
+        function changeLetterColor(letter) {
+            if (document.getElementById(letter + 'Toggle').style.color == 'red') {
+                document.getElementById(letter + 'Toggle').style.color = 'green'
+                document.getElementById(letter + 'Field').setAttribute('value','green')
+            }
+            else if (document.getElementById(letter + 'Toggle').style.color == 'green') {
+                document.getElementById(letter + 'Toggle').style.color = 'black'
+                document.getElementById(letter + 'Field').setAttribute('value','black')
+            }
+            else {
+                document.getElementById(letter + 'Toggle').style.color = 'red'
+                document.getElementById(letter + 'Field').setAttribute('value','red')
+            }
+            var allLetters = document.getElementsByClassName("letter" + letter)
+            for (var i = 0; i < allLetters.length; i++) {
+                if (document.getElementById(letter + 'Toggle').style.color == 'red') {
+                    allLetters[i].style.color = 'green'
+                } else if (document.getElementById(letter + 'Toggle').style.color == 'green') {
+                    allLetters[i].style.color = 'black'
+                 } else {
+                    allLetters[i].style.color = 'red'
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]! Lets play JOTTO</h1>
+<h1 class="display-4"><span th:utext="${word}"></span></h1>
+
+<span th:utext="${message}"></span>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+<br>
+<span th:utext="${userSecret}"></span>
+
+<table id="alphabet">
+    <tr >
+        <td id='aToggle' onclick="changeLetterColor('a')">A</td>
+        <td id='bToggle' onclick="changeLetterColor('b')">B</td>
+        <td id='cToggle' onclick="changeLetterColor('c')">C</td>
+        <td id='dToggle' onclick="changeLetterColor('d')">D</td>
+        <td id='eToggle' onclick="changeLetterColor('e')">E</td>
+        <td id='fToggle' onclick="changeLetterColor('f')">F</td>
+        <td id='gToggle' onclick="changeLetterColor('g')">G</td>
+        <td id='hToggle' onclick="changeLetterColor('h')">H</td>
+        <td id='iToggle' onclick="changeLetterColor('i')">I</td>
+        <td id='jToggle' onclick="changeLetterColor('j')">J</td>
+        <td id='kToggle' onclick="changeLetterColor('k')">K</td>
+        <td id='lToggle' onclick="changeLetterColor('l')">L</td>
+        <td id='mToggle' onclick="changeLetterColor('m')">M</td>
+    </tr>
+
+    <tr >
+        <td id='nToggle' onclick="changeLetterColor('n')">N</td>
+        <td id='oToggle' onclick="changeLetterColor('o')">O</td>
+        <td id='pToggle' onclick="changeLetterColor('p')">P</td>
+        <td id='qToggle' onclick="changeLetterColor('q')">Q</td>
+        <td id='rToggle' onclick="changeLetterColor('r')">R</td>
+        <td id='sToggle' onclick="changeLetterColor('s')">S</td>
+        <td id='tToggle' onclick="changeLetterColor('t')">T</td>
+        <td id='uToggle' onclick="changeLetterColor('u')">U</td>
+        <td id='vToggle' onclick="changeLetterColor('v')">V</td>
+        <td id='wToggle' onclick="changeLetterColor('w')">W</td>
+        <td id='xToggle' onclick="changeLetterColor('x')">X</td>
+        <td id='yToggle' onclick="changeLetterColor('y')">Y</td>
+        <td id='zToggle' onclick="changeLetterColor('z')">Z</td>
+        </td>
+    </tr>
+</table>
+<h1>Enter your guess: </h1>
+<form action="#" th:action="@{/jotto}" th:object="${form}" method="post">
+    <input type="text" th:field="*{word}"/>
+    <input type="hidden" th:field="*{aField}" id="aField" value="black"/>
+    <input type="hidden" th:field="*{bField}" id="bField" value="black"/>
+    <input type="hidden" th:field="*{cField}" id="cField" value="black"/>
+    <input type="hidden" th:field="*{dField}" id="dField" value="black"/>
+    <input type="hidden" th:field="*{eField}" id="eField" value="black"/>
+    <input type="hidden" th:field="*{fField}" id="fField" value="black"/>
+    <input type="hidden" th:field="*{gField}" id="gField" value="black"/>
+    <input type="hidden" th:field="*{hField}" id="hField" value="black"/>
+    <input type="hidden" th:field="*{iField}" id="iField" value="black"/>
+    <input type="hidden" th:field="*{jField}" id="jField" value="black"/>
+    <input type="hidden" th:field="*{kField}" id="kField" value="black"/>
+    <input type="hidden" th:field="*{lField}" id="lField" value="black"/>
+    <input type="hidden" th:field="*{mField}" id="mField" value="black"/>
+    <input type="hidden" th:field="*{nField}" id="nField" value="black"/>
+    <input type="hidden" th:field="*{oField}" id="oField" value="black"/>
+    <input type="hidden" th:field="*{pField}" id="pField" value="black"/>
+    <input type="hidden" th:field="*{qField}" id="qField" value="black"/>
+    <input type="hidden" th:field="*{rField}" id="rField" value="black"/>
+    <input type="hidden" th:field="*{sField}" id="sField" value="black"/>
+    <input type="hidden" th:field="*{tField}" id="tField" value="black"/>
+    <input type="hidden" th:field="*{uField}" id="uField" value="black"/>
+    <input type="hidden" th:field="*{vField}" id="vField" value="black"/>
+    <input type="hidden" th:field="*{wField}" id="wField" value="black"/>
+    <input type="hidden" th:field="*{xField}" id="xField" value="black"/>
+    <input type="hidden" th:field="*{yField}" id="yField" value="black"/>
+    <input type="hidden" th:field="*{zField}" id="zField" value="black"/>
+    <input type="hidden" th:field="*{aFieldComp}" id="aFieldComp" value="black"/>
+    <input type="hidden" th:field="*{bFieldComp}" id="bFieldComp" value="black"/>
+    <input type="hidden" th:field="*{cFieldComp}" id="cFieldComp" value="black"/>
+    <input type="hidden" th:field="*{dFieldComp}" id="dFieldComp" value="black"/>
+    <input type="hidden" th:field="*{eFieldComp}" id="eFieldComp" value="black"/>
+    <input type="hidden" th:field="*{fFieldComp}" id="fFieldComp" value="black"/>
+    <input type="hidden" th:field="*{gFieldComp}" id="gFieldComp" value="black"/>
+    <input type="hidden" th:field="*{hFieldComp}" id="hFieldComp" value="black"/>
+    <input type="hidden" th:field="*{iFieldComp}" id="iFieldComp" value="black"/>
+    <input type="hidden" th:field="*{jFieldComp}" id="jFieldComp" value="black"/>
+    <input type="hidden" th:field="*{kFieldComp}" id="kFieldComp" value="black"/>
+    <input type="hidden" th:field="*{lFieldComp}" id="lFieldComp" value="black"/>
+    <input type="hidden" th:field="*{mFieldComp}" id="mFieldComp" value="black"/>
+    <input type="hidden" th:field="*{nFieldComp}" id="nFieldComp" value="black"/>
+    <input type="hidden" th:field="*{oFieldComp}" id="oFieldComp" value="black"/>
+    <input type="hidden" th:field="*{pFieldComp}" id="pFieldComp" value="black"/>
+    <input type="hidden" th:field="*{qFieldComp}" id="qFieldComp" value="black"/>
+    <input type="hidden" th:field="*{rFieldComp}" id="rFieldComp" value="black"/>
+    <input type="hidden" th:field="*{aFieldComp}" id="sFieldComp" value="black"/>
+    <input type="hidden" th:field="*{tFieldComp}" id="tFieldComp" value="black"/>
+    <input type="hidden" th:field="*{uFieldComp}" id="uFieldComp" value="black"/>
+    <input type="hidden" th:field="*{vFieldComp}" id="vFieldComp" value="black"/>
+    <input type="hidden" th:field="*{wFieldComp}" id="wFieldComp" value="black"/>
+    <input type="hidden" th:field="*{xFieldComp}" id="xFieldComp" value="black"/>
+    <input type="hidden" th:field="*{yFieldComp}" id="yFieldComp" value="black"/>
+    <input type="hidden" th:field="*{zFieldComp}" id="zFieldComp" value="black"/>
+    <input type="submit" value="Submit"/>
+</form>
+<div class="container">
+    <div class="row">
+        <div class="col" id="user_choice">User Guesses:
+            <tr th:each="guess : ${userGuesses}">
+                <td th:utext="${guess}"></td>
+            </tr>
+        </div>
+        <div class="col" id="user_points">User Points:
+
+            <tr th:each="points : ${userPoints}">
+                <td th:text="${points}"></td>
+            </tr>
+        </div>
+        <div class="col" id="ai_guess">Computer Guesses:
+            <tr th:each="guess : ${compGuesses}">
+                <td th:utext="${guess}"></td>
+            </tr>
+        </div>
+        <div class="col" id="ai_points">Computer Points:
+            <tr th:each="points : ${compPoints}">
+                <td th:text="${points}"></td>
+            </tr>
+        </div>
+        <div class="w-100"></div>
+    </div>
+</div>
+
+</body>
+</html>

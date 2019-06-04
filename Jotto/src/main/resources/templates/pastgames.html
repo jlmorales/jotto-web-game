@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Stat For $USERNAME</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/pastgames.css"/>
+
+
+</head>
+<body>
+
+<!--<form th:action="@{/logout}" method="post">-->
+<!--<input type="submit" value="Sign Out"/>-->
+<!--</form>-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{/logout}">LogOut</a>
+</nav>
+
+<br>
+<h1>See Your Past Game Statistic</h1>
+<script type="text/javascript" src="/js/PastGames.js"></script>
+<center>
+    <div th:each="game:${games}">
+        <button class="accordion" id="gameId1"  th:text="${game.gameid}"></button>
+        <div class="panel">
+            <p>
+            <p><span style="font-weight:bold">User Word:</span>
+            <span id="userWord1" th:text="${game.user_word}"></span><br>
+            <span style="font-weight:bold"> Computer Word: </span>
+            <span id="computerWord1" th:text="${game.computer_word}"></span>
+            </p>
+            <table>
+                <tr>
+                    <th>User's Guess(pts)</th>
+                    <th>Computer's Guess(pts)</th>
+                </tr>
+                <tr th:each="guess:${game.guesses}">
+                    <td class="userGuesses1" th:text="|${guess.userguess}  (${guess.userPoints})|">color</td>
+                    <td class="userGuesses1" th:text="|${guess.compguess}  (${guess.compPoints})|">table</td>
+                </tr>
+            </table>
+
+            </p>
+        </div>
+    </div>
+</center>
+
+
+<script>
+
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click",
+
+            function () {
+
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            }
+        );
+    }
+
+
+</script>
+
+
+</body>
+</html>

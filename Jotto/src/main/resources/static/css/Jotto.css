@@ -1,0 +1,18 @@
+#alphabet {
+    font-weight: bold;
+}
+
+#user_choice{
+    background-color: black;
+    font-size: 48px;
+    color: aliceblue;
+    border-color: lightskyblue;
+    border-width: 2px 2px 2px 2px;
+
+}
+
+#ai_guess{
+    background-color: chartreuse;
+    font-size: 48px;
+    border-color: lightskyblue;
+}
